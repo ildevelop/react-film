@@ -6,34 +6,51 @@ export const getRecipe = () => async dispatch => {
   dispatch({type: mainConstanst.FETCH_recipes_START});
   try {
     const foods = await axios.get("http://www.recipepuppy.com/api/?i=onions,garlic&q=salat&p=1",{headers: {'Content-Type': 'text/plain'}});
-    const localUsers = JSON.parse(localStorage.getItem("foods"));
-    if (!localStorage.getItem("foods")) {
+    const localUsers = JSON.parse(localStorage.getItem("recipes"));
+    if (!localStorage.getItem("recipes")) {
       dispatch({
         type: mainConstanst.FETCH_recipes_SUCCESS,
-        users: foods.data.results
+        recipes: foods.data.results
       });
     } else {
       dispatch({
         type: mainConstanst.FETCH_LOCAL_RECIPES_SUCCESS,
-        users: localUsers
+        recipes: localUsers
       });
     }
   }
   catch (err) {
-    new Promise((resolve, reject) => {
-      resolve(setTimeout(() => {
-          dispatch({
-            type: mainConstanst.FETCH_recipes_FAILURE,
-            data:mockApiData.results
-          })
-        }, 1000
-      ));
-    })}
+    const localUsers = JSON.parse(localStorage.getItem("recipes"));
+    if (!localStorage.getItem("recipes")) {
+      dispatch({
+        type: mainConstanst.FETCH_recipes_SUCCESS,
+        recipes: mockApiData.results
+      });
+    } else {
+      dispatch({
+        type: mainConstanst.FETCH_LOCAL_RECIPES_SUCCESS,
+        recipes: localUsers
+      });
+    }
+
+  }
 };
-export const searchUser = value => {
+export const searchRecipe = value => {
   return {
-    type: mainConstanst.SEARCH_USER,
+    type: mainConstanst.SEARCH_RECIPE,
     value
+  };
+};
+export const removeRecipe = recipe => {
+  return {
+    type: mainConstanst.REMOVE_MY_RECIPE,
+    recipe
+  };
+};
+export const addRecipe = recipe => {
+  return {
+    type: mainConstanst.ADD_MY_RECIPE,
+    recipe
   };
 };
 

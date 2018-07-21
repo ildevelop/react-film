@@ -10,11 +10,6 @@ const Header = () => {
         Home
       </NavLink>
       <NavLink
-        to="/search"
-        activeStyle={{backgroundColor: "#007bff", color: "#fff", height: "40px"}}>
-        Search
-      </NavLink>
-      <NavLink
         to="/myRecipes"
         activeStyle={{backgroundColor: "#007bff", color: "#fff", height: "40px"}}>
         My Recipe

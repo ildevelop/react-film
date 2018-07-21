@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import './RecipeList.scss'
 
 const recipeList = props => {
-  const {value,onRemoveFriend, onAddRecipe, recipes, currentPage, itemsPerPage, onInputChange, page, loaded} = props;
+  const {value,onRemoveRecipe, onAddRecipe, recipes, currentPage, itemsPerPage, onInputChange, page, loaded} = props;
   const startOffset = (currentPage - 1) * itemsPerPage;
   let startCount = 0;
 
@@ -40,7 +40,7 @@ const recipeList = props => {
                   </p>
                   <h3>ingredients:</h3>
                   <p>{recipe.ingredients}</p>
-                  {!recipe.isFriend ? (
+                  {!recipe.isRecipe ? (
                     <Button
                       style={{marginBottom: "10px"}}
                       color="success"
@@ -51,7 +51,7 @@ const recipeList = props => {
                     <Button
                       style={{marginBottom: "10px"}}
                       color="danger"
-                      onClick={() => onRemoveFriend(recipe)}>
+                      onClick={() => onRemoveRecipe(recipe)}>
                       Remove From Friend List
                     </Button>
                   )}

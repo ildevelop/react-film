@@ -8,7 +8,7 @@ import * as selector from './../selectors'
 import * as mainActions from '../actions/mainActions';
 import Header from "../components/Header/Header";
 import RecipeList from "../components/RecipeList/RecipeList";
-import { Button } from 'reactstrap';
+import MyRecipeList from "../components/MyRecipes/MyRecipe";
 
 
 class App extends Component {
@@ -27,10 +27,15 @@ class App extends Component {
   componentDidUpdate() {
     localStorage.setItem("recipes", JSON.stringify(this.props.recipes));
   }
-  handleSearchUser = value => {
-    this.props.searchUser(value);
+  handleSearchRecipe = value => {
+    this.props.searchRecipe(value);
   };
-
+  handleRemoveMyRecipe = recipe => {
+    this.props.removeRecipe(recipe);
+  };
+  handleAddRecipe= recipe => {
+    this.props.addRecipe(recipe);
+  };
 
   page = page => {
     this.setState({
@@ -39,7 +44,7 @@ class App extends Component {
   };
 
   render() {
-    const {recipes, loaded,searchValue,searchedUsers} = this.props;
+    const {recipes, loaded,searchValue,searchedUsers,myRecipes} = this.props;
     const {itemsPerPage, currentPage} = this.state;
 
     return (
@@ -54,10 +59,25 @@ class App extends Component {
                   loaded={loaded}
                   recipes={searchedUsers}
                   value={searchValue}
-                  onInputChange={this.handleSearchUser}
+                  onInputChange={this.handleSearchRecipe}
+                  onAddRecipe={this.handleAddRecipe}
+                  onRemoveRecipe={this.handleRemoveMyRecipe}
                   currentPage={currentPage}
                   itemsPerPage={itemsPerPage}
                   page={this.page}
+                />
+              );
+            }}
+          />
+          <Route
+            path="/myRecipes"
+            render={() => {
+              return (
+                <MyRecipeList
+                  loaded={loaded}
+                  recipes={myRecipes}
+                  onRemovemyRecipe={this.handleRemoveMyRecipe}
+                  onAddToFavemyRecipe={this.handleAddRecipe}
                 />
               );
             }}
@@ -75,6 +95,7 @@ const mapStateToProps = state => ({
   recipes: selector.getRecipes(state),
   searchValue:selector.getSearchValue(state),
   searchedUsers: selector.getSearchedRecipe(state),
+  myRecipes: selector.getMyRecipes(state),
 
 
 });
