@@ -18,7 +18,7 @@ const recipeList = props => {
           <p>last {recipes.length} recipe</p>
           <Input
             type="text"
-            placeholder="Please, enter name or surname of user"
+            placeholder="Please, enter name of recipes or ingredients"
             value={value}
             onChange={({target}) => onInputChange(target.value)}
           />
@@ -43,7 +43,7 @@ const recipeList = props => {
                   {!recipe.isFriend ? (
                     <Button
                       style={{marginBottom: "10px"}}
-                      color="primary"
+                      color="success"
                       onClick={() => onAddRecipe(recipe)}>
                       Add To List
                     </Button>

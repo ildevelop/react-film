@@ -8,6 +8,7 @@ import * as selector from './../selectors'
 import * as mainActions from '../actions/mainActions';
 import Header from "../components/Header/Header";
 import RecipeList from "../components/RecipeList/RecipeList";
+import { Button } from 'reactstrap';
 
 
 class App extends Component {

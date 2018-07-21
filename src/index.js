@@ -6,7 +6,7 @@ import App from './containers/App';
 import {Provider} from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import store from './reducers/store'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/scss/bootstrap.scss"
 
 
 ReactDOM.render(
