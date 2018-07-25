@@ -5,7 +5,7 @@ import Loader from "../Loader/Loader";
 
 
 const myRecipeList = props => {
-  const {recipes, onRemovemyRecipe, loaded, onAddToFavemyRecipe, onRemoveToFavemyRecipe} = props;
+  const {recipes, onRemovemyRecipe, loaded} = props;
   console.log('myRecipe-list',recipes);
   return (
     <Fragment>

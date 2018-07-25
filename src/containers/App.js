@@ -44,7 +44,7 @@ class App extends Component {
   };
 
   render() {
-    const {recipes, loaded,searchValue,searchedUsers,myRecipes} = this.props;
+    const { loaded,searchValue,searchedUsers,myRecipes} = this.props;
     const {itemsPerPage, currentPage} = this.state;
 
     return (

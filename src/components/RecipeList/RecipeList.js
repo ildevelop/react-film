@@ -3,11 +3,10 @@ import {Button, ListGroup, ListGroupItem, Input} from 'reactstrap';
 
 import Loader from '../Loader/Loader';
 // import Pagination from "../Pagination/index";
-import {Link} from "react-router-dom";
 import './RecipeList.scss'
 
 const recipeList = props => {
-  const {value,onRemoveRecipe, onAddRecipe, recipes, currentPage, itemsPerPage, onInputChange, page, loaded} = props;
+  const {value,onRemoveRecipe, onAddRecipe, recipes, currentPage, itemsPerPage, onInputChange, loaded} = props;
   const startOffset = (currentPage - 1) * itemsPerPage;
   let startCount = 0;
 

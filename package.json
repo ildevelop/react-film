@@ -3,6 +3,13 @@
   "version": "0.1.0",
   "homepage": "https://ildevelop.github.io/recipe-builder",
   "private": true,
+   "proxy": {
+     "/api": {
+       "target": "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3",
+       "secure": false,
+       "changeOrigin": true
+     }
+   },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-core": "6.26.0",
@@ -40,7 +47,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "node scripts/start.js ",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
     "predeploy": "npm run build",
