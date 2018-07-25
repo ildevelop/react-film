@@ -9,8 +9,11 @@ export const getRecipe = () => async dispatch => {
     const foods = await axios.get('/api', {});
     console.log('foods',foods);
     debugger
+    if(!foods.data.results){
+      throw new Error({'err':'response without data'});
+    }
     const localUsers = JSON.parse(localStorage.getItem("recipes"));
-    if (!localStorage.getItem("recipes")) {
+    if (!localStorage.getItem("recipes" )) {
       dispatch({
         type: mainConstanst.FETCH_recipes_SUCCESS,
         recipes: foods.data.results
