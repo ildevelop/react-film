@@ -27,10 +27,12 @@ class App extends Component {
     this.props.searchCities(value);
   };
   handleRemoveMyCities = city => {
-    this.props.removeCities(city);
+    console.log('handleRemoveMy',city);
+    this.props.removeCity(city);
   };
   handleAddCities= city => {
-    this.props.addCities(city);
+    console.log('handleAddCities',city);
+    this.props.addCity(city);
   };
 
   page = page => {

@@ -1,8 +1,6 @@
 import React, {Fragment} from "react";
 import {Button, ListGroup, ListGroupItem, Input} from 'reactstrap';
-
 import Loader from '../Loader/Loader';
-// import Pagination from "../Pagination/index";
 import './CitiesList.scss'
 
 const CitiesList = props => {
@@ -12,13 +10,20 @@ const CitiesList = props => {
     <Fragment>
       {loaded ? (
         <div className="search-list">
-          <p>Top {cities.length} popular cities on the world</p>
-          <Input
-            type="text"
-            placeholder="Please, enter name of cities"
-            value={value}
-            onChange={({target}) => onInputChange(target.value)}
-          />
+          <p>Top {cities.length} popular cities in the world</p>
+          <div className="search-box">
+            <div className="search-item">
+              <Input
+                type="text"
+                placeholder="Please, enter a city name"
+                value={value}
+                onChange={({target}) => onInputChange(target.value)}
+              />
+              <Button outline color="success" onClick={(value)=>{
+                console.log("click",value);}}>  ADD A NEW</Button>
+            </div>
+          </div>
+
           <ListGroup>
             {cities.map((city, index) => {
 
@@ -28,10 +33,10 @@ const CitiesList = props => {
                   {city.weather[0].main === "Rain"?
                     <img
                       src={"//ssl.gstatic.com/onebox/weather/48/rain_light.png"}
-                      alt="recipe-pic"/>
+                      alt="weather-pic"/>
                     : <img
                       src={"//ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"}
-                      alt="recipe-pic"/>}
+                      alt="weather-pic"/>}
                   <p>
                     {city.sys.country + "/" + city.name}
                   </p>
@@ -51,7 +56,7 @@ const CitiesList = props => {
                       style={{marginBottom: "10px"}}
                       color="danger"
                       onClick={() => onRemoveCities(city)}>
-                      Remove From Friend List
+                      Remove From Favorite List
                     </Button>
                   )}
                 </ListGroupItem>

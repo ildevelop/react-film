@@ -10,9 +10,9 @@ const Header = () => {
         Home
       </NavLink>
       <NavLink
-        to="/myRecipes"
+        to="/MyFavorites"
         activeStyle={{backgroundColor: "#007bff", color: "#fff", height: "40px"}}>
-        My Recipe
+        My Favorites
       </NavLink>
     </div>
   );

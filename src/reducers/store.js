@@ -20,10 +20,10 @@ const mainReducer = (state = initialState, action) => {
     case actionTypes.SEARCH_CITY:
       return {...state, searchedValue: action.value};
     case actionTypes.ADD_MY_CITY:
-      const searchedToAdd = state.cities.findIndex(city => city.title=== action.city.title);
+      const searchedToAdd = state.cities.findIndex(city => city.name=== action.city.name);
       return dotProp.set(state, `cities.${searchedToAdd}.isFavorites`, true);
     case actionTypes.REMOVE_MY_CITY:
-      const searchedToRemove = state.cities.findIndex(city => city.title === action.city.title);
+      const searchedToRemove = state.cities.findIndex(city => city.name === action.city.name);
       return dotProp.set(state, `cities.${searchedToRemove}.isFavorites`, false);
     default:
       return state;

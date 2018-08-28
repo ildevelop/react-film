@@ -27,12 +27,14 @@ export const getCitiesAPI = (city) => async dispatch => {
     let url3 = mockUrl + "London" + mockID;
     let url4 = mockUrl + "tel aviv" + mockID;
     let url5 = mockUrl + "hong kong" + mockID;
+    let url6 = mockUrl + "brazil" + mockID;
     const cityr = await axios.get(url1);
     const city1 = await axios.get(url2);
     const city2 = await axios.get(url3);
     const city3 = await axios.get(url4);
     const city4 = await axios.get(url5);
-    let cities = [cityr.data, city1.data, city2.data,city3.data,city4.data];
+    const city5 = await axios.get(url6);
+    let cities = [cityr.data, city1.data, city2.data,city3.data,city4.data,city5.data];
 
 
     const localCities = JSON.parse(localStorage.getItem("cities"));
