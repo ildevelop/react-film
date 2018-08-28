@@ -7,36 +7,30 @@ import { Container } from 'reactstrap';
 import * as selector from './../selectors'
 import * as mainActions from '../actions/mainActions';
 import Header from "../components/Header/Header";
-import RecipeList from "../components/RecipeList/RecipeList";
-import MyRecipeList from "../components/MyFavorites/MyFavorites";
+import CitiesList from "../components/CitiesList/CitiesList";
+import MyFavorites from "../components/MyFavorites/MyFavorites";
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      currentPage: 1,
-      itemsPerPage: 20
-    };
-    let city = "moscow";
-    this.props.getRecipe(city);
-
   };
 
   componentDidMount() {
+    this.props.getCitiesAPI();
   }
 
   componentDidUpdate() {
     localStorage.setItem("recipes", JSON.stringify(this.props.recipes));
   }
-  handleSearchRecipe = value => {
-    this.props.searchRecipe(value);
+  handleSearchCities = value => {
+    this.props.searchCities(value);
   };
-  handleRemoveMyRecipe = recipe => {
-    this.props.removeRecipe(recipe);
+  handleRemoveMyCities = city => {
+    this.props.removeCities(city);
   };
-  handleAddRecipe= recipe => {
-    this.props.addRecipe(recipe);
+  handleAddCities= city => {
+    this.props.addCities(city);
   };
 
   page = page => {
@@ -46,8 +40,7 @@ class App extends Component {
   };
 
   render() {
-    const { loaded,searchValue,searchedUsers,myRecipes} = this.props;
-    const {itemsPerPage, currentPage} = this.state;
+    const { loaded,searchValue,searchedCities,myCities} = this.props;
 
     return (
       <Container>
@@ -57,29 +50,26 @@ class App extends Component {
             exact path="/"
             render={() => {
               return (
-                <RecipeList
+                <CitiesList
                   loaded={loaded}
-                  recipes={searchedUsers}
+                  cities={searchedCities}
                   value={searchValue}
-                  onInputChange={this.handleSearchRecipe}
-                  onAddRecipe={this.handleAddRecipe}
-                  onRemoveRecipe={this.handleRemoveMyRecipe}
-                  currentPage={currentPage}
-                  itemsPerPage={itemsPerPage}
-                  page={this.page}
+                  onInputChange={this.handleSearchCities}
+                  onAddCities={this.handleAddCities}
+                  onRemoveCities={this.handleRemoveMyCities}
                 />
               );
             }}
           />
           <Route
-            path="/myRecipes"
+            path="/MyFavorites"
             render={() => {
               return (
-                <MyRecipeList
+                <MyFavorites
                   loaded={loaded}
-                  recipes={myRecipes}
-                  onRemovemyRecipe={this.handleRemoveMyRecipe}
-                  onAddToFavemyRecipe={this.handleAddRecipe}
+                  cities={myCities}
+                  onRemovemyCities={this.handleRemoveMyCities}
+                  onAddToFavemyCities={this.handleAddCities}
                 />
               );
             }}
@@ -93,11 +83,11 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   loaded: selector.getLoadingStatus(state),
-  recipe: selector.getRecipe(state),
-  recipes: selector.getRecipes(state),
+  city: selector.getCity(state),
+  cities: selector.getCities(state),
   searchValue:selector.getSearchValue(state),
-  searchedUsers: selector.getSearchedRecipe(state),
-  myRecipes: selector.getMyRecipes(state),
+  searchedCities: selector.getSearchedCities(state),
+  myCities: selector.getMyCities(state),
 
 
 });

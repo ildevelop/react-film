@@ -3,62 +3,61 @@ import {Button, ListGroup, ListGroupItem, Input} from 'reactstrap';
 
 import Loader from '../Loader/Loader';
 // import Pagination from "../Pagination/index";
-import './RecipeList.scss'
+import './CitiesList.scss'
 
-const recipeList = props => {
-  const {value,onRemoveRecipe, onAddRecipe, recipes, currentPage, itemsPerPage, onInputChange, loaded} = props;
-  const startOffset = (currentPage - 1) * itemsPerPage;
-  let startCount = 0;
-
+const CitiesList = props => {
+  const {value, onRemoveCities, onAddCities, cities, onInputChange, loaded} = props;
+  console.log('cities',cities);
   return (
     <Fragment>
       {loaded ? (
         <div className="search-list">
-          <p>last {recipes.length} recipe</p>
+          <p>Top {cities.length} popular cities on the world</p>
           <Input
             type="text"
-            placeholder="Please, enter name of recipes or ingredients"
+            placeholder="Please, enter name of cities"
             value={value}
             onChange={({target}) => onInputChange(target.value)}
           />
           <ListGroup>
-            {recipes.map((recipe, index) => {
-              return index >= startOffset && startCount < itemsPerPage ? ++startCount && (
-                <ListGroupItem
+            {cities.map((city, index) => {
+
+                return <ListGroupItem
                   key={index}
                   className="text-center">
-                  {recipe.thumbnail ?
+                  {city.weather[0].main === "Rain"?
                     <img
-                      src={recipe.thumbnail}
+                      src={"//ssl.gstatic.com/onebox/weather/48/rain_light.png"}
                       alt="recipe-pic"/>
                     : <img
-                      src={"http://img.recipepuppy.com/560551.jpg"}
+                      src={"//ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"}
                       alt="recipe-pic"/>}
                   <p>
-                    {recipe.title}
+                    {city.sys.country + "/" + city.name}
                   </p>
-                  <h3>ingredients:</h3>
-                  <p>{recipe.ingredients}</p>
-                  {!recipe.isFavorites ? (
+                  <p>{city.main.temp}C</p>
+                  <p>{city.weather[0].description}</p>
+                  <p>today the minimum temperature:{city.main.temp_min}</p>
+                  <p>today the maximum temperature:{city.main.temp_max}</p>
+                  {!city.isFavorites ? (
                     <Button
                       style={{marginBottom: "10px"}}
                       color="success"
-                      onClick={() => onAddRecipe(recipe)}>
+                      onClick={() => onAddCities(city)}>
                       Add To List
                     </Button>
                   ) : (
                     <Button
                       style={{marginBottom: "10px"}}
                       color="danger"
-                      onClick={() => onRemoveRecipe(recipe)}>
+                      onClick={() => onRemoveCities(city)}>
                       Remove From Friend List
                     </Button>
                   )}
                 </ListGroupItem>
-              ) : (
-                null
-              );
-            })}
+              }
+            )
+            }
           </ListGroup>
 
         </div>
@@ -67,4 +66,4 @@ const recipeList = props => {
   );
 };
 
-export default recipeList;
+export default CitiesList;
