@@ -5,7 +5,7 @@
   "private": true,
   "proxy": {
     "/api": {
-      "target": "http://www.recipepuppy.com/api/?i=onions,garlic&q=omelet&p=3",
+      "target": "api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=88d53c3306bc49b15fc64a2531c97d34",
       "secure": false,
       "changeOrigin": true
     }

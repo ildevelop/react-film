@@ -6,6 +6,7 @@ import * as dotProp from 'dot-prop-immutable';
 
 const initialState = {
   recipes: [],
+  cities:[],
   recipe: {},
   searchedValue: "",
   loaded: false
@@ -16,10 +17,11 @@ const mainReducer = (state = initialState, action) => {
     case actionTypes.ADD_RECIPE:
       return {...state, recipe: state.recipe + 1};
     case actionTypes.FETCH_recipes_SUCCESS:
-      console.log('actionStore', action.recipes);
-      return {...state, recipes: action.recipes, loaded: true};
+      console.log('actionStore', action.payload);
+      return {...state, cities: action.payload, loaded: true};
     case actionTypes.FETCH_LOCAL_RECIPES_SUCCESS:
-      return {...state, recipes: action.recipes, loaded: true};
+      console.log('citiespayload',action.payload);
+      return {...state, cities: action.payload, loaded: true};
     case actionTypes.FETCH_recipes_FAILURE:
       console.log('ERRR', action);
       return {...state, recipes: action.data, loaded: true};

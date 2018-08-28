@@ -18,10 +18,12 @@ class App extends Component {
       currentPage: 1,
       itemsPerPage: 20
     };
+    let city = "moscow";
+    this.props.getRecipe(city);
+
   };
 
   componentDidMount() {
-    this.props.getRecipe();
   }
 
   componentDidUpdate() {
