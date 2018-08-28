@@ -39,7 +39,7 @@ const recipeList = props => {
                   </p>
                   <h3>ingredients:</h3>
                   <p>{recipe.ingredients}</p>
-                  {!recipe.isRecipe ? (
+                  {!recipe.isFavorites ? (
                     <Button
                       style={{marginBottom: "10px"}}
                       color="success"

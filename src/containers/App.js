@@ -8,7 +8,7 @@ import * as selector from './../selectors'
 import * as mainActions from '../actions/mainActions';
 import Header from "../components/Header/Header";
 import RecipeList from "../components/RecipeList/RecipeList";
-import MyRecipeList from "../components/MyRecipes/MyRecipe";
+import MyRecipeList from "../components/MyFavorites/MyFavorites";
 
 
 class App extends Component {

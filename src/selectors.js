@@ -10,6 +10,6 @@ export const getSearchedRecipe= createSelector(getRecipes, getSearchValue, (reci
 });
 
 export const getMyRecipes = createSelector(getRecipes, (recipes) => {
-  return recipes.filter(recipe => recipe.isRecipe);
+  return recipes.filter(recipe => recipe.isFavorites);
 });
 

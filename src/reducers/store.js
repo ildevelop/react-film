@@ -14,26 +14,18 @@ const initialState = {
 
 const mainReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.ADD_RECIPE:
-      return {...state, recipe: state.recipe + 1};
-    case actionTypes.FETCH_recipes_SUCCESS:
-      console.log('actionStore', action.payload);
+    case actionTypes.FETCH_cities_SUCCESS:
       return {...state, cities: action.payload, loaded: true};
-    case actionTypes.FETCH_LOCAL_RECIPES_SUCCESS:
-      console.log('citiespayload',action.payload);
+    case actionTypes.FETCH_LOCAL_CITIES_SUCCESS:
       return {...state, cities: action.payload, loaded: true};
-    case actionTypes.FETCH_recipes_FAILURE:
-      console.log('ERRR', action);
-      return {...state, recipes: action.data, loaded: true};
-    case actionTypes.SEARCH_RECIPE:
+    case actionTypes.SEARCH_CITY:
       return {...state, searchedValue: action.value};
-    case actionTypes.ADD_MY_RECIPE:
-      const searchedToAdd = state.recipes.findIndex(recipe => recipe.title=== action.recipe.title);
-      return dotProp.set(state, `recipes.${searchedToAdd}.isRecipe`, true);
-    case actionTypes.REMOVE_MY_RECIPE:
-      const searchedToRemove = state.recipes.findIndex(recipe => recipe.title === action.recipe.title);
-      return dotProp.set(state, `recipes.${searchedToRemove}.isRecipe`, false);
-
+    case actionTypes.ADD_MY_CITY:
+      const searchedToAdd = state.cities.findIndex(recipe => recipe.title=== action.recipe.title);
+      return dotProp.set(state, `cities.${searchedToAdd}.isFavorites`, true);
+    case actionTypes.REMOVE_MY_CITY:
+      const searchedToRemove = state.cities.findIndex(recipe => recipe.title === action.recipe.title);
+      return dotProp.set(state, `cities.${searchedToRemove}.isFavorites`, false);
     default:
       return state;
   }
