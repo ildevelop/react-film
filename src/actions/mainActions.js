@@ -39,6 +39,9 @@ export const getCitiesAPI = (city) => async dispatch => {
 
     const localCities = JSON.parse(localStorage.getItem("cities"));
     if (!localStorage.getItem("cities")) {
+      let localData =JSON.stringify(cities);
+      console.log('localData',localData);
+      localStorage.setItem('cities', localData);
       dispatch({
         type: mainConstanst.FETCH_CITIES_SUCCESS,
         payload: cities

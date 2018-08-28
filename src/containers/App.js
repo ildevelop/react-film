@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    localStorage.setItem("recipes", JSON.stringify(this.props.recipes));
+    localStorage.setItem("cities", JSON.stringify(this.props.cities));
   }
   handleSearchCities = value => {
     this.props.searchCities(value);
