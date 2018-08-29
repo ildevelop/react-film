@@ -26,7 +26,7 @@ export const getCitiesAPI = (city) => async dispatch => {
           type: mainConstanst.FETCH_NEW_CITY_ERROR,
         });
     }
-    
+
   }else {
     let url1 = mockUrl + "Moscow" + mockID;
     let url2 = mockUrl + "New York" + mockID;

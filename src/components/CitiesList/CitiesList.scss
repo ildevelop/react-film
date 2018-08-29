@@ -1,10 +1,10 @@
 .recipe-list,
 .search-list {
 
-  .search-box{
+  .search-box {
     display: flex;
     justify-content: center;
-    .search-item{
+    .search-item {
       display: flex;
       flex-direction: row;
       width: 50%;
@@ -29,6 +29,27 @@
       }
       p {
         margin: 10px 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .recipe-list,
+  .search-list {
+
+    .search-box {
+      display: flex;
+      justify-content: center;
+      .search-item {
+        width: 100%;
+        padding: 20px 0;
+      }
+    }
+    .list-group{
+      .list-group-item{
+        margin: 2px;
+        max-width: 100%;
       }
     }
   }
