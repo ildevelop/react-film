@@ -4,8 +4,7 @@ import Loader from '../Loader/Loader';
 import './CitiesList.scss'
 
 const CitiesList = props => {
-  const {value, onRemoveCities, onAddCities, cities, onInputChange, loaded} = props;
-  console.log('cities',cities);
+  const {value, onRemoveCities, onAddCities, cities, onInputChange, loaded,onAddNewCity} = props;
   return (
     <Fragment>
       {loaded ? (
@@ -19,8 +18,7 @@ const CitiesList = props => {
                 value={value}
                 onChange={({target}) => onInputChange(target.value)}
               />
-              <Button outline color="success" onClick={(value)=>{
-                console.log("click",value);}}>  ADD A NEW</Button>
+              <Button outline color="success" onClick={({target})=> onAddNewCity(target.value)}>  ADD A NEW</Button>
             </div>
           </div>
 

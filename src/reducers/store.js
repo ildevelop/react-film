@@ -5,10 +5,11 @@ import * as actionTypes from '../reducers/constant'
 import * as dotProp from 'dot-prop-immutable';
 
 const initialState = {
-  cities:[],
+  cities: [],
   city: {},
   searchedValue: "",
-  loaded: false
+  loaded: false,
+  errorNewCity: false
 };
 
 const mainReducer = (state = initialState, action) => {
@@ -20,11 +21,18 @@ const mainReducer = (state = initialState, action) => {
     case actionTypes.SEARCH_CITY:
       return {...state, searchedValue: action.value};
     case actionTypes.ADD_MY_CITY:
-      const searchedToAdd = state.cities.findIndex(city => city.name=== action.city.name);
+      const searchedToAdd = state.cities.findIndex(city => city.name === action.city.name);
       return dotProp.set(state, `cities.${searchedToAdd}.isFavorites`, true);
     case actionTypes.REMOVE_MY_CITY:
       const searchedToRemove = state.cities.findIndex(city => city.name === action.city.name);
       return dotProp.set(state, `cities.${searchedToRemove}.isFavorites`, false);
+    case actionTypes.FETCH_NEW_CITY_ERROR:
+      return {...state, errorNewCity: !state.errorNewCity, searchedValue: ""};
+    case actionTypes.FETCH_NEW_CITY_SUCCESS:
+      console.log('ETCH_NEW_CITY_SUCCESS',action.payload);
+      let newCities = state.cities;
+      newCities.push(action.payload);
+      return {...state,cities:newCities,searchedValue:""};
     default:
       return state;
   }

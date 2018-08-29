@@ -6,21 +6,27 @@ let mockID = ',test&APPID=b2a83818e8669b44cdf5ad3db4fce355&units=metric';
 export const getCitiesAPI = (city) => async dispatch => {
 
   if(city){
-    let url = mockUrl + city + mockID;
-    const newcity = await axios.get(url);
-    if(newcity.data){
-      dispatch({
-        type: mainConstanst.FETCH_NEW_CITY_SUCCESS,
-        payload: newcity
-        //TODO check in store
-      });
-    }else {
-      dispatch({
-        type: mainConstanst.FETCH_NEW_CITY_ERROR,
-        //TODO check in store
-      });
+    try {
+      let url = mockUrl + city + mockID;
+      const newcity = await axios.get(url);
+      console.log('newcity',newcity);
+      if(newcity.data){
+        dispatch({
+          type: mainConstanst.FETCH_NEW_CITY_SUCCESS,
+          payload: newcity.data
+        });
+      }else {
+        return dispatch({
+          type: mainConstanst.FETCH_NEW_CITY_ERROR,
+        });
+      }
+    }catch (e) {
+      console.log('ERROR fetch data from API',e);
+      return dispatch({
+          type: mainConstanst.FETCH_NEW_CITY_ERROR,
+        });
     }
-
+    
   }else {
     let url1 = mockUrl + "Moscow" + mockID;
     let url2 = mockUrl + "New York" + mockID;
@@ -53,9 +59,11 @@ export const getCitiesAPI = (city) => async dispatch => {
       });
     }
   }
-
-
-
+};
+export const closeModal = () => {
+  return {
+    type: mainConstanst.FETCH_NEW_CITY_ERROR,
+  };
 };
 export const searchCities = value => {
   return {

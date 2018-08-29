@@ -4,6 +4,7 @@ export const getCities = state => state.cities;
 export const getCity = state => state.city;
 export const getSearchValue = state => state.searchedValue;
 export const getLoadingStatus = state => state.loaded;
+export const getErrorNewCity = state => state.errorNewCity;
 
 export const getSearchedCities= createSelector(getCities, getSearchValue, (cities, searchValue) => {
 
