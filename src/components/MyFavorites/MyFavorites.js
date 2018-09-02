@@ -5,38 +5,38 @@ import Loader from "../Loader/Loader";
 
 
 const myRecipeList = props => {
-  const {cities, onRemovemyCities, loaded} = props;
-  console.log('myRecipe-list', cities);
+  const {films, onRemovemyfilms, loaded} = props;
+  console.log('myRecipe-list', films);
   return (
     <Fragment>
       {loaded ? (
         <div className="myCity-list">
-          <p>{cities.length === 1 ? `You have only ${cities.length} favorites city` : cities.length > 1 ? `You have ${cities.length} favorites cities` : "you do not have a favorite city"}</p>
+          <p>{films.length === 1 ? `You have only ${films.length} favorites film` : films.length > 1 ? `You have ${films.length} favorites films` : "you do not have a favorite film"}</p>
           <ListGroup>
-            {cities.map((city, index) => {
+            {films.map((film, index) => {
 
-                return <ListGroupItem
+                return  <ListGroupItem
                   key={index}
                   className="text-center">
-                  {city.weather[0].main === "Rain" ?
+                  {film.Poster?
                     <img
-                      src={"//ssl.gstatic.com/onebox/weather/48/rain_light.png"}
-                      alt="recipe-pic"/>
+                      src={film.Poster}
+                      alt="film-pic"/>
                     : <img
                       src={"//ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"}
-                      alt="recipe-pic"/>}
+                      alt="film-pic"/>}
                   <p>
-                    {city.sys.country + "/" + city.name}
+                    {film.Title+ "/" + film.Year}
                   </p>
-                  <p>{city.main.temp}C</p>
-                  <p>{city.weather[0].description}</p>
-                  <p>today the minimum temperature:{city.main.temp_min}</p>
-                  <p>today the maximum temperature:{city.main.temp_max}</p>
-
+                  <p>Actors:{film.Actors}</p>
+                  <p>Descriptions:{film.Plot}</p>
+                  {film.Ratings.length>1?
+                    <p>Ratings:{film.Ratings[0].Value}</p>:null
+                  }
                   <Button
                     style={{marginBottom: "10px"}}
                     color="danger"
-                    onClick={() => onRemovemyCities(city)}>
+                    onClick={() => onRemovemyfilms(film)}>
                     Remove From Favorite List
                   </Button>
 

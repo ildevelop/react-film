@@ -1,17 +1,17 @@
 import { createSelector } from 'reselect';
 
-export const getCities = state => state.cities;
-export const getCity = state => state.city;
+export const getfilms = state => state.films;
+export const getFilm = state => state.film;
 export const getSearchValue = state => state.searchedValue;
 export const getLoadingStatus = state => state.loaded;
-export const getErrorNewCity = state => state.errorNewCity;
+export const getErrorNewCity = state => state.errorNewFilm;
 
-export const getSearchedCities= createSelector(getCities, getSearchValue, (cities, searchValue) => {
+export const getSearchedfilms= createSelector(getfilms, getSearchValue, (films, searchValue) => {
 
-  return cities.filter(city => city.name.toLowerCase().includes(searchValue.toLowerCase()));
+  return films.filter(city => city.Title.toLowerCase().includes(searchValue.toLowerCase()));
 });
 
-export const getMyCities = createSelector(getCities, (cities) => {
-  return cities.filter(city => city.isFavorites);
+export const getMyfilms = createSelector(getfilms, (films) => {
+  return films.filter(film => film.isFavorites);
 });
 

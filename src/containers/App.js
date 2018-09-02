@@ -7,7 +7,7 @@ import { Container, Modal, ModalHeader, ModalBody, ModalFooter ,Button} from 're
 import * as selector from './../selectors'
 import * as mainActions from '../actions/mainActions';
 import Header from "../components/Header/Header";
-import CitiesList from "../components/CitiesList/CitiesList";
+import FilmsList from "../components/FilmsList/FilmsList";
 import MyFavorites from "../components/MyFavorites/MyFavorites";
 
 
@@ -18,7 +18,7 @@ class App extends Component {
       modal: this.props.errorCity
     };
     this.toggle = this.toggle.bind(this);
-    this.props.getCitiesAPI();
+    this.props.getfilmsAPI();
   };
 
   toggle() {
@@ -29,20 +29,20 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    localStorage.setItem("cities", JSON.stringify(this.props.cities));
+    localStorage.setItem("films", JSON.stringify(this.props.films));
   }
   handleSearchCity = value => {
-    this.props.searchCities(value);
+    this.props.searchfilms(value);
   };
-  handleRemoveMyCities = city => {
-    this.props.removeCity(city);
+  handleRemoveMyfilms = film => {
+    this.props.removeCity(film);
   };
-  searchedCity= city => {
-    this.props.addCity(city);
+  searchedFilm= film => {
+    this.props.addFilm(film);
   };
    handleAddNewCity = async() => {
-     await this.props.getCitiesAPI(this.props.searchValue);
-    console.log("handleAddNewCity",this.props.errorCity);
+     await this.props.getfilmsAPI(this.props.searchValue);
+    console.log("handleAddNewF",this.props.searchValue);
     if(this.props.errorCity){
       this.setState({modal:!this.state.modal})
     }
@@ -50,7 +50,7 @@ class App extends Component {
   };
 
   render() {
-    const { loaded,searchValue,searchedCities,myCities} = this.props;
+    const { loaded,searchValue,searchedfilms,myfilms} = this.props;
     return (
       <Container>
         <Header />
@@ -59,13 +59,13 @@ class App extends Component {
             exact path="/"
             render={() => {
               return (
-                <CitiesList
+                <FilmsList
                   loaded={loaded}
-                  cities={searchedCities}
+                  films={searchedfilms}
                   value={searchValue}
                   onInputChange={this.handleSearchCity}
-                  onAddCities={this.searchedCity}
-                  onRemoveCities={this.handleRemoveMyCities}
+                  onAddfilms={this.searchedCity}
+                  onRemovefilms={this.handleRemoveMyfilms}
                   onAddNewCity={this.handleAddNewCity}
                 />
               );
@@ -77,9 +77,9 @@ class App extends Component {
               return (
                 <MyFavorites
                   loaded={loaded}
-                  cities={myCities}
-                  onRemovemyCities={this.handleRemoveMyCities}
-                  onAddToFavemyCities={this.searchedCity}
+                  films={myfilms}
+                  onRemovemyfilms={this.handleRemoveMyfilms}
+                  onAddToFavemyfilms={this.searchedCity}
                 />
               );
             }}
@@ -90,8 +90,8 @@ class App extends Component {
           <ModalHeader toggle={this.toggle}>Error input</ModalHeader>
           <ModalBody>
             <p>Please check the correctness of the input</p>
-            <p>Most likely entered the wrong city</p>
-            <p>Try again to enter the name of the city</p>
+            <p>Most likely entered the wrong film</p>
+            <p>Try again to enter the name of the film</p>
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={this.toggle}>Cancel</Button>
@@ -104,11 +104,11 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   loaded: selector.getLoadingStatus(state),
-  city: selector.getCity(state),
-  cities: selector.getCities(state),
+  film: selector.getFilm(state),
+  films: selector.getfilms(state),
   searchValue:selector.getSearchValue(state),
-  searchedCities: selector.getSearchedCities(state),
-  myCities: selector.getMyCities(state),
+  searchedfilms: selector.getSearchedfilms(state),
+  myfilms: selector.getMyfilms(state),
   errorCity: selector.getErrorNewCity(state),
 
 
