@@ -40,7 +40,7 @@ class App extends Component {
   searchedFilm= film => {
     this.props.addFilm(film);
   };
-   handleAddNewCity = async() => {
+   handleAddNewFilm = async() => {
      await this.props.getfilmsAPI(this.props.searchValue);
     console.log("handleAddNewF",this.props.searchValue);
     if(this.props.errorCity){
@@ -64,9 +64,9 @@ class App extends Component {
                   films={searchedfilms}
                   value={searchValue}
                   onInputChange={this.handleSearchCity}
-                  onAddfilms={this.searchedCity}
+                  onAddfilms={this.searchedFilm}
                   onRemovefilms={this.handleRemoveMyfilms}
-                  onAddNewCity={this.handleAddNewCity}
+                  onAddNewFilm={this.handleAddNewFilm}
                 />
               );
             }}
@@ -79,7 +79,7 @@ class App extends Component {
                   loaded={loaded}
                   films={myfilms}
                   onRemovemyfilms={this.handleRemoveMyfilms}
-                  onAddToFavemyfilms={this.searchedCity}
+                  onAddToFavemyfilms={this.searchedFilm}
                 />
               );
             }}

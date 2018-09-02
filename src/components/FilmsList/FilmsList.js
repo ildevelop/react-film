@@ -4,7 +4,7 @@ import Loader from '../Loader/Loader';
 import './FilmsList.scss'
 
 const filmsList = props => {
-  const {value, onRemovefilms, onAddfilms, films, onInputChange, loaded,onAddNewCity} = props;
+  const {value, onRemovefilms, onAddfilms, films, onInputChange, loaded,onAddNewFilm} = props;
   return (
     <Fragment>
       {loaded ? (
@@ -18,7 +18,7 @@ const filmsList = props => {
                 value={value}
                 onChange={({target}) => onInputChange(target.value)}
               />
-              <Button outline color="success" onClick={({target})=> onAddNewCity(target.value)}>  ADD A NEW</Button>
+              <Button outline color="success" onClick={({target})=> onAddNewFilm(target.value)}>  ADD A NEW</Button>
             </div>
           </div>
 
@@ -41,7 +41,7 @@ const filmsList = props => {
                   <p>Actors:{film.Actors}</p>
                   <p>Descriptions:{film.Plot}</p>
                     {film.Ratings.length>1?
-                      <p>Ratings:{film.Ratings[0].Value}</p>:null
+                      <p>Ratings:{film.Ratings[0].Value}</p>:<p>Initial release:SOON</p>
                     }
                   {!film.isFavorites ? (
                     <Button

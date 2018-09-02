@@ -7,8 +7,11 @@ export const getLoadingStatus = state => state.loaded;
 export const getErrorNewCity = state => state.errorNewFilm;
 
 export const getSearchedfilms= createSelector(getfilms, getSearchValue, (films, searchValue) => {
+  console.log("films",films);
+  debugger
+  return films.filter(film => film.Title.toLowerCase().includes(searchValue.toLowerCase()));
 
-  return films.filter(city => city.Title.toLowerCase().includes(searchValue.toLowerCase()));
+
 });
 
 export const getMyfilms = createSelector(getfilms, (films) => {

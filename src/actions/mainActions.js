@@ -5,16 +5,16 @@ export const getfilmsAPI = (title,year) => async dispatch => {
 
   if(title){
     try {
-      let url = URL + 't='+title + '&y='+year;
+      let url = URL + 't='+title + '&y='+year?year:"";
       const newfilm = await axios.get(url);
-      if(newfilm.data){
+      if(!newfilm.data.Response){
         dispatch({
           type: mainConstanst.FETCH_NEW_FILM_SUCCESS,
           payload: newfilm.data
         });
       }else {
         return dispatch({
-          type: mainConstanst.FETCH_NEW_FILM_SUCCESS,
+          type: mainConstanst.FETCH_NEW_FILM_ERROR,
         });
       }
     }catch (e) {
