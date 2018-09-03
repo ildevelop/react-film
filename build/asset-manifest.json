@@ -1,9 +1,6 @@
 {
-  "main.js": "static/js/main.c5540d3c.js",
-  "main.js.map": "static/js/main.c5540d3c.js.map",
-  "static/media/filmsList.scss": "static/media/filmsList.c6975b86.scss",
-  "static/media/Loader.scss": "static/media/Loader.137f61ea.scss",
-  "static/media/bootstrap.scss": "static/media/bootstrap.c70bed7a.scss",
-  "static/media/header.scss": "static/media/header.24f9085d.scss",
-  "static/media/index.scss": "static/media/index.3febd5f9.scss"
+  "main.css": "static/css/main.34baf996.css",
+  "main.css.map": "static/css/main.34baf996.css.map",
+  "main.js": "266cfe85.js",
+  "main.js.map": "266cfe85.js.map"
 }
