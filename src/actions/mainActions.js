@@ -2,53 +2,54 @@ import * as mainConstanst from '../reducers/constant'
 import axios from "axios";
 import {URL} from './secret'
 
-export const getfilmsAPI = (title, year) => async dispatch => {
-
-  if (title) {
-    console.log('URL', URL);
-    let url = URL + 't=' + title + '&y=' + year ;
-    console.log('url', url);
-    const newfilm = await axios.get(url);
-    console.log('newfilm', newfilm);
-    if (newfilm.data.Response) {
-      dispatch({
-        type: mainConstanst.FETCH_NEW_FILM_SUCCESS,
-        payload: newfilm.data
-      });
-    } else {
-      return dispatch({
-        type: mainConstanst.FETCH_NEW_FILM_ERROR,
-      });
-    }
-
-
+export const initState = () => dispatch => {
+  const localfilms = JSON.parse(localStorage.getItem("films"));
+  if (localStorage.getItem("films")) {
+    dispatch({
+      type: mainConstanst.FETCH_LOCAL_films_SUCCESS,
+      payload: localfilms
+    });
   } else {
-    let url1 = URL + 't=Infinity War&y=2018';
-    let url2 = URL + 't=Mission Impossible&y=2018';
-    let url3 = URL + 't=Venom&y=2018';
-
-    const film1 = await axios.get(url1);
-    const film2 = await axios.get(url2);
-    const film3 = await axios.get(url3);
-    let films = [film1.data, film2.data, film3.data];
-
-
-    const localfilms = JSON.parse(localStorage.getItem("films"));
-    if (!localStorage.getItem("films")) {
-      let localData = JSON.stringify(films);
-      localStorage.setItem('films', localData);
-      dispatch({
-        type: mainConstanst.FETCH_films_SUCCESS,
-        payload: films
-      });
-    } else {
-      dispatch({
-        type: mainConstanst.FETCH_LOCAL_films_SUCCESS,
-        payload: localfilms
-      });
-    }
+    let localData = JSON.stringify([]);
+    localStorage.setItem('films', localData);
+    dispatch({
+      type: mainConstanst.FETCH_films_SUCCESS,
+      payload: []
+    });
   }
 };
+
+export const getfilmsAPI = (title, year) => async dispatch => {
+
+  console.log('URL', title,year);
+  let url = URL + 't=' + title + '&y=' + year;
+  const newfilm = await axios.get(url);
+  console.log('newfilm', newfilm);
+  if (newfilm.data.Response === "True") {
+    dispatch({
+      type: mainConstanst.FETCH_NEW_FILM_SUCCESS,
+      payload: newfilm.data
+    });
+  } else {
+    return dispatch({
+      type: mainConstanst.FETCH_NEW_FILM_ERROR,
+    });
+  }
+
+
+};
+export const clearSearchData = ()=>{
+  return {
+    type: mainConstanst.CLEAR_SEARCH,
+  };
+};
+export const addYear = (year)=>{
+  return {
+    type: mainConstanst.ADD_YEAR,
+    payload:year
+  };
+};
+
 export const closeModal = () => {
   return {
     type: mainConstanst.FETCH_NEW_FILM_ERROR,

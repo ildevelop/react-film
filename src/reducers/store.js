@@ -8,6 +8,7 @@ const initialState = {
   films: [],
   film: {},
   searchedValue: "",
+  year:"",
   loaded: false,
   errorNewFilm: false
 };
@@ -22,16 +23,27 @@ const mainReducer = (state = initialState, action) => {
       return {...state, searchedValue: action.value};
     case actionTypes.ADD_MY_FILM:
       const searchedToAdd = state.films.findIndex(film => film.Title === action.film.Title);
-      return dotProp.set(state, `films.${searchedToAdd}.isFavorites`, true);
+      let NewStore = dotProp.set(state, `films.${searchedToAdd}.isFavorites`, true);
+      let localData = JSON.stringify(NewStore.films);
+      localStorage.setItem('films', localData);
+      return NewStore;
     case actionTypes.REMOVE_MY_FILM:
       const searchedToRemove = state.films.findIndex(film => film.Title=== action.film.Title);
       return dotProp.set(state, `films.${searchedToRemove}.isFavorites`, false);
     case actionTypes.FETCH_NEW_FILM_ERROR:
-      return {...state, errorNewFilm: !state.errorNewFilm, searchedValue: ""};
+      return {...state, errorNewFilm: !state.errorNewFilm};
+    case actionTypes.ADD_YEAR:
+      return {...state, year: action.payload};
+    case actionTypes.CLEAR_SEARCH:
+      let newFilms = JSON.stringify([]);
+      localStorage.setItem('films', newFilms);
+      return {...state,films: [], searchedValue: "",year:""};
     case actionTypes.FETCH_NEW_FILM_SUCCESS:
       let newfilms = state.films;
       newfilms.push(action.payload);
-      return {...state,films:newfilms,searchedValue:""};
+      let films = JSON.stringify(newfilms);
+      localStorage.setItem('films', films);
+      return {...state,films:newfilms,searchedValue:"",year:""};
     default:
       return state;
   }

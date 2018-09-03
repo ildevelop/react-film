@@ -1,34 +1,52 @@
 import React, {Fragment} from "react";
-import {Button, ListGroup, ListGroupItem, Input} from 'reactstrap';
+import {Button, ListGroup, InputGroup, ListGroupItem, Input} from 'reactstrap';
 import Loader from '../Loader/Loader';
 import './FilmsList.scss'
 
 const filmsList = props => {
-  const {value, onRemovefilms, onAddfilms, films, onInputChange, loaded,onAddNewFilm} = props;
+  const {value,year, onRemovefilms,onClearSearch, onAddfilms, films, onInputChange,onInputChangeYears, loaded, onAddNewFilm} = props;
   return (
     <Fragment>
       {loaded ? (
         <div className="search-list">
-          <p>Top {films.length} popular films</p>
+          <p>Top {films.length} yours films</p>
           <div className="search-box">
             <div className="search-item">
-              <Input
-                type="text"
-                placeholder="Please, enter a film name"
-                value={value}
-                onChange={({target}) => onInputChange(target.value)}
-              />
-              <Button outline color="success" onClick={({target})=> onAddNewFilm(target.value)}>  ADD A NEW</Button>
+              <InputGroup>
+                <Input
+                  type="text"
+                  placeholder="Search film..."
+                  value={value}
+                  onChange={({target}) => onInputChange(target.value)}
+                />
+                <Input
+                  type="number"
+                  placeholder="Year"
+                  value={year}
+                  onChange={({target}) => onInputChangeYears(target.value)}
+                />
+              </InputGroup>
+              {value?
+                <div className="buttonGroup">
+                  <Button color="success" onClick={({target}) => onAddNewFilm(target.value)}> ADD A NEW</Button>
+                  <Button color="warning" onClick={() => onClearSearch()}> RESET</Button>
+                </div>
+              :<div className="buttonGroup">
+                  <Button outline color="success" disabled> ADD A NEW</Button>
+                  <Button color="warning" onClick={() => onClearSearch()}> RESET</Button>
+
+                </div>
+              }
             </div>
           </div>
 
           <ListGroup>
-            {films.map((film, index) => {
+            {films.length>0?films.map((film, index) => {
 
                 return <ListGroupItem
                   key={index}
                   className="text-center">
-                  {film.Poster?
+                  {film.Poster ?
                     <img
                       src={film.Poster}
                       alt="film-pic"/>
@@ -36,13 +54,13 @@ const filmsList = props => {
                       src={"//ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"}
                       alt="film-pic"/>}
                   <p>
-                    {film.Title+ "/" + film.Year}
+                    {film.Title + "/" + film.Year}
                   </p>
                   <p>Actors:{film.Actors}</p>
                   <p>Descriptions:{film.Plot}</p>
-                    {film.Ratings.length>1?
-                      <p>Ratings:{film.Ratings[0].Value}</p>:<p>Initial release:SOON</p>
-                    }
+                  {film.Ratings.length > 1 ?
+                    <p>Ratings:{film.Ratings[0].Value}</p> : <p>Initial release:SOON</p>
+                  }
                   {!film.isFavorites ? (
                     <Button
                       style={{marginBottom: "10px"}}
@@ -60,7 +78,7 @@ const filmsList = props => {
                   )}
                 </ListGroupItem>
               }
-            )
+            ):null
             }
           </ListGroup>
 
