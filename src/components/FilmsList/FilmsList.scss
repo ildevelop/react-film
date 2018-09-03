@@ -48,6 +48,8 @@
       display: flex;
       justify-content: center;
       .search-item {
+        display: flex;
+        flex-direction: column;
         width: 100%;
         padding: 20px 0;
       }

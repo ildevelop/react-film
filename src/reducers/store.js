@@ -43,7 +43,7 @@ const mainReducer = (state = initialState, action) => {
       newfilms.push(action.payload);
       let films = JSON.stringify(newfilms);
       localStorage.setItem('films', films);
-      return {...state,films:newfilms,searchedValue:"",year:""};
+      return {...state,films:newfilms,searchedValue:"",year:"", loaded: true};
     default:
       return state;
   }

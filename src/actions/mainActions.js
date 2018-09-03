@@ -20,11 +20,8 @@ export const initState = () => dispatch => {
 };
 
 export const getfilmsAPI = (title, year) => async dispatch => {
-
-  console.log('URL', title,year);
   let url = URL + 't=' + title + '&y=' + year;
   const newfilm = await axios.get(url);
-  console.log('newfilm', newfilm);
   if (newfilm.data.Response === "True") {
     dispatch({
       type: mainConstanst.FETCH_NEW_FILM_SUCCESS,

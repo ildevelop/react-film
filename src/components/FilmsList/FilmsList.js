@@ -54,28 +54,33 @@ const filmsList = props => {
                       src={"//ssl.gstatic.com/onebox/weather/48/partly_cloudy.png"}
                       alt="film-pic"/>}
                   <p>
-                    {film.Title + "/" + film.Year}
+                    {film.Title + "/" + film.Year +": "+ film.Country}
                   </p>
+                  <p>Director:{film.Director}</p>
                   <p>Actors:{film.Actors}</p>
                   <p>Descriptions:{film.Plot}</p>
                   {film.Ratings.length > 1 ?
-                    <p>Ratings:{film.Ratings[0].Value}</p> : <p>Initial release:SOON</p>
+                    <p>Ratings:{film.imdbRating}</p> : <p>Ratings:not yet</p>
                   }
-                  {!film.isFavorites ? (
-                    <Button
-                      style={{marginBottom: "10px"}}
-                      color="success"
-                      onClick={() => onAddfilms(film)}>
-                      Add To List
-                    </Button>
-                  ) : (
-                    <Button
-                      style={{marginBottom: "10px"}}
-                      color="danger"
-                      onClick={() => onRemovefilms(film)}>
-                      Remove From Favorite List
-                    </Button>
-                  )}
+                  <div>
+                    {film.Website !=="N/A"? <Button style={{margin: "10px"}} target="_blank" href={film.Website}>See now</Button>:null}
+                    {!film.isFavorites ? (
+                      <Button
+                        style={{margin: "10px"}}
+                        color="success"
+                        onClick={() => onAddfilms(film)}>
+                        Add To List
+                      </Button>
+                    ) : (
+                      <Button
+                        style={{margin: "10px"}}
+                        color="danger"
+                        onClick={() => onRemovefilms(film)}>
+                        Remove From Favorite List
+                      </Button>
+                    )}
+                  </div>
+
                 </ListGroupItem>
               }
             ):null

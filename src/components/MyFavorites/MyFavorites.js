@@ -6,7 +6,6 @@ import Loader from "../Loader/Loader";
 
 const myRecipeList = props => {
   const {films, onRemovemyfilms, loaded} = props;
-  console.log('myRecipe-list', films);
   return (
     <Fragment>
       {loaded ? (
