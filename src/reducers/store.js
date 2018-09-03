@@ -21,10 +21,10 @@ const mainReducer = (state = initialState, action) => {
     case actionTypes.SEARCH_FILM:
       return {...state, searchedValue: action.value};
     case actionTypes.ADD_MY_FILM:
-      const searchedToAdd = state.films.findIndex(city => city.name === action.city.name);
+      const searchedToAdd = state.films.findIndex(film => film.Title === action.film.Title);
       return dotProp.set(state, `films.${searchedToAdd}.isFavorites`, true);
     case actionTypes.REMOVE_MY_FILM:
-      const searchedToRemove = state.films.findIndex(city => city.name === action.city.name);
+      const searchedToRemove = state.films.findIndex(film => film.Title=== action.film.Title);
       return dotProp.set(state, `films.${searchedToRemove}.isFavorites`, false);
     case actionTypes.FETCH_NEW_FILM_ERROR:
       return {...state, errorNewFilm: !state.errorNewFilm, searchedValue: ""};

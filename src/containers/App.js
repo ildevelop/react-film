@@ -31,18 +31,18 @@ class App extends Component {
   componentDidUpdate() {
     localStorage.setItem("films", JSON.stringify(this.props.films));
   }
-  handleSearchCity = value => {
+  handleSearchFilm = value => {
     this.props.searchfilms(value);
   };
   handleRemoveMyfilms = film => {
-    this.props.removeCity(film);
+    this.props.removeFilm(film);
   };
   searchedFilm= film => {
     this.props.addFilm(film);
   };
    handleAddNewFilm = async() => {
+     console.log('searchValue',this.props.searchValue);
      await this.props.getfilmsAPI(this.props.searchValue);
-    console.log("handleAddNewF",this.props.searchValue);
     if(this.props.errorCity){
       this.setState({modal:!this.state.modal})
     }
@@ -63,7 +63,7 @@ class App extends Component {
                   loaded={loaded}
                   films={searchedfilms}
                   value={searchValue}
-                  onInputChange={this.handleSearchCity}
+                  onInputChange={this.handleSearchFilm}
                   onAddfilms={this.searchedFilm}
                   onRemovefilms={this.handleRemoveMyfilms}
                   onAddNewFilm={this.handleAddNewFilm}
@@ -109,7 +109,7 @@ const mapStateToProps = state => ({
   searchValue:selector.getSearchValue(state),
   searchedfilms: selector.getSearchedfilms(state),
   myfilms: selector.getMyfilms(state),
-  errorCity: selector.getErrorNewCity(state),
+  errorFilm: selector.getErrorNewFilm(state),
 
 
 

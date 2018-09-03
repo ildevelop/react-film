@@ -1,30 +1,28 @@
 import * as mainConstanst from '../reducers/constant'
 import axios from "axios";
 import {URL} from './secret'
-export const getfilmsAPI = (title,year) => async dispatch => {
 
-  if(title){
-    try {
-      let url = URL + 't='+title + '&y='+year?year:"";
-      const newfilm = await axios.get(url);
-      if(!newfilm.data.Response){
-        dispatch({
-          type: mainConstanst.FETCH_NEW_FILM_SUCCESS,
-          payload: newfilm.data
-        });
-      }else {
-        return dispatch({
-          type: mainConstanst.FETCH_NEW_FILM_ERROR,
-        });
-      }
-    }catch (e) {
-      console.log('ERROR fetch data from API',e);
+export const getfilmsAPI = (title, year) => async dispatch => {
+
+  if (title) {
+    console.log('URL', URL);
+    let url = URL + 't=' + title + '&y=' + year ;
+    console.log('url', url);
+    const newfilm = await axios.get(url);
+    console.log('newfilm', newfilm);
+    if (newfilm.data.Response) {
+      dispatch({
+        type: mainConstanst.FETCH_NEW_FILM_SUCCESS,
+        payload: newfilm.data
+      });
+    } else {
       return dispatch({
-          type: mainConstanst.FETCH_NEW_FILM_ERROR,
-        });
+        type: mainConstanst.FETCH_NEW_FILM_ERROR,
+      });
     }
 
-  }else {
+
+  } else {
     let url1 = URL + 't=Infinity War&y=2018';
     let url2 = URL + 't=Mission Impossible&y=2018';
     let url3 = URL + 't=Venom&y=2018';
@@ -37,8 +35,7 @@ export const getfilmsAPI = (title,year) => async dispatch => {
 
     const localfilms = JSON.parse(localStorage.getItem("films"));
     if (!localStorage.getItem("films")) {
-      let localData =JSON.stringify(films);
-      console.log('localData',localData);
+      let localData = JSON.stringify(films);
       localStorage.setItem('films', localData);
       dispatch({
         type: mainConstanst.FETCH_films_SUCCESS,
@@ -63,16 +60,16 @@ export const searchfilms = value => {
     value
   };
 };
-export const removeFilm = city => {
+export const removeFilm = film => {
   return {
     type: mainConstanst.REMOVE_MY_FILM,
-    city
+    film
   };
 };
-export const addFilm = city => {
+export const addFilm = film => {
   return {
     type: mainConstanst.ADD_MY_FILM,
-    city
+    film
   };
 };
 
