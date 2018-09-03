@@ -1,9 +1,10 @@
-## Weather online 
-A small application Where you can see the weather anywhere in the world.
-You can also add your favorite films
+## Films online 
+A small application Where you can find films you need.
+You can also can see all descrioprion and more about your film and add to your favorite list of films
 
 ## How to start
-* `git clone`
+* `git clone https://github.com/ildevelop/react-film.git`
+* `cd react-film`
 * `npm i`
 * `npm start`
 
